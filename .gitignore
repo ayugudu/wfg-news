@@ -40,6 +40,9 @@ nbdist/
 *.swp
 */aliyun.properties
 
+# out
+**/target/
+
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
