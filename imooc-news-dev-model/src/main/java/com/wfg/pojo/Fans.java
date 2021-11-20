@@ -1,22 +1,25 @@
 package com.wfg.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+@TableName
 public class Fans {
-    @Id
+    @TableId
     private String id;
 
     /**
      * 作家用户id
      */
-    @Column(name = "writer_id")
+    @TableField( "writer_id")
     private String writerId;
 
     /**
      * 粉丝用户id
      */
-    @Column(name = "fan_id")
+    @TableField( "fan_id")
     private String fanId;
 
     /**
@@ -27,7 +30,7 @@ public class Fans {
     /**
      * 粉丝昵称
      */
-    @Column(name = "fan_nickname")
+    @TableField( "fan_nickname")
     private String fanNickname;
 
     /**

@@ -1,13 +1,11 @@
 package com.wfg.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
 import java.util.Date;
 
-@Table(name = "admin_user")
-public class AdminUser {
-    @Id
+
+public class AdminUser{
+
     private String id;
 
     /**
@@ -23,25 +21,25 @@ public class AdminUser {
     /**
      * 人脸入库图片信息，该信息保存到mongoDB的gridFS中
      */
-    @Column(name = "face_id")
+
     private String faceId;
 
     /**
      * 管理人员的姓名
      */
-    @Column(name = "admin_name")
+
     private String adminName;
 
     /**
      * 创建时间 创建时间
      */
-    @Column(name = "created_time")
+
     private Date createdTime;
 
     /**
      * 更新时间 更新时间
      */
-    @Column(name = "updated_time")
+
     private Date updatedTime;
 
     /**

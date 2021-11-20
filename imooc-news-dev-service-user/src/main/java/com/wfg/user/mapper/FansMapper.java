@@ -1,8 +1,8 @@
 package com.wfg.user.mapper;
 
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wfg.pojo.Fans;
-import com.wfg.my.mapper.MyMapper;
 
-public interface FansMapper extends MyMapper<Fans> {
+public interface FansMapper extends BaseMapper<Fans> {
 }

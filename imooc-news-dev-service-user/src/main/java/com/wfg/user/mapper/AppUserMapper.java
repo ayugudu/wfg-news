@@ -1,10 +1,11 @@
 package com.wfg.user.mapper;
 
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wfg.pojo.AppUser;
-import com.wfg.my.mapper.MyMapper;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AppUserMapper extends MyMapper<AppUser> {
+public interface AppUserMapper extends BaseMapper<AppUser> {
 }

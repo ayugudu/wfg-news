@@ -85,6 +85,11 @@
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
         </dependency>
+     <!--引入aop-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
 
         <!--第三方云厂商短信依赖-->
         <dependency>
