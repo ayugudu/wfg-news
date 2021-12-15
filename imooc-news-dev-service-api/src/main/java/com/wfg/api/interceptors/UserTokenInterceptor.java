@@ -28,12 +28,12 @@ public class UserTokenInterceptor  extends BaseInterceptor implements HandlerInt
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-       String userId= request.getHeader("headerUserId");
-        String userToken= request.getHeader("headUserToken");
+        String userId= request.getHeader("headerUserId");
+        String userToken= request.getHeader("headerUserToken");
         //判断是否放行
         boolean run = verifyUserIdToken(userId,userToken,REDIS_USER_TOKEN);
 
-        return HandlerInterceptor.super.preHandle(request, response, handler);
+        return run;
     }
 
     @Override

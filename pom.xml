@@ -13,6 +13,13 @@
         <module>imooc-news-dev-model</module>
         <module>imooc-news-dev-service-api</module>
         <module>imooc-news-dev-service-user</module>
+        <module>imooc-news-dev-service-files</module>
+        <module>imooc-news-dev-service-admin</module>
+        <module>imooc-news-dev-service-article</module>
+        <module>imooc-news-dev-service-article-html</module>
+        <module>springcloud-eureka</module>
+        <module>springcloud-eureka-cluster</module>
+        <module>springcloud-zuul-server</module>
     </modules>
     <packaging>pom</packaging>
     <!--聚合工程 顶级工程-->
@@ -28,7 +35,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.4.RELEASE</version>
+        <version>2.2.5.RELEASE</version>
         <relativePath />
     </parent>
     <properties>
@@ -52,6 +59,8 @@
         <springfox-swagger2.version>2.4.0</springfox-swagger2.version>
         <swagger-bootstrap-ui.version>1.6</swagger-bootstrap-ui.version>
         <fastdfs.version>1.27.2</fastdfs.version>
+
+        <springboot-freemarker.version>2.2.5.RELEASE</springboot-freemarker.version>
 
         <slf4j.version>1.7.21</slf4j.version>
         <joda-time.version>2.10.6</joda-time.version>
@@ -192,6 +201,13 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+            </dependency>
+            <!--freemarker 依赖-->
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-freemarker</artifactId>
+                <version>${springboot-freemarker.version}</version>
             </dependency>
 
         </dependencies>

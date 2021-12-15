@@ -1,0 +1,59 @@
+############################################################
+#
+# 用户微服务
+# web访问端口号  约定：8003
+#
+############################################################
+server:
+  port: 8005
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: -1  # tomcat默认大小2M，超过2M的文件不会被捕获，需要调整此处大小为100MB或者-1即可
+
+## 配置项目信息
+spring:
+   profiles:
+     active: dev # dev:开发环境,test:测试环境,prod:生产环境
+   application:
+     name: service-admin
+
+
+   datasource: # 数据源的相关配置
+     type: com.zaxxer.hikari.HikariDataSource          # 数据源类型：HikariCP
+     driver-class-name: com.mysql.jdbc.Driver          # mysql驱动
+     url: jdbc:mysql://localhost:3306/imooc-news-dev?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+     username: root
+     password: 123456
+     hikari:
+       connection-timeout: 30000       # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 默认:30秒
+       minimum-idle: 5                 # 最小连接数
+       maximum-pool-size: 20           # 最大连接数
+       auto-commit: true               # 自动提交
+       idle-timeout: 600000            # 连接超时的最大时长（毫秒），超时则被释放（retired），默认:10分钟
+       pool-name: DateSourceHikariCP     # 连接池名字
+       max-lifetime: 1800000           # 连接的生命时长（毫秒），超时而且没被使用则被释放（retired），默认:30分钟 1800000ms
+       connection-test-query: SELECT 1
+
+   jackson:
+     date-format: yyyy-MM-dd HH:mm:ss
+     time-zone: GMT+8
+  #mongodb配置
+   data:
+     mongodb:
+       uri: mongodb://root:root@42.192.10.179:27017
+       database: wfg-news
+
+
+
+mybatis-plus:
+  type-aliases-package: com.wfg.pojo        #所有pojo类所在包路径
+  mapper-locations: classpath:mapper/*.xml  #mapper 映射文件
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启SQL语句打印
+    map-underscore-to-camel-case: true   # 开启驼峰命名
+
+# 分页插件设置
+pagehelper:
+  helpDialect: mysql
+  support-methods-arguments: true
+

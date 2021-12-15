@@ -1,0 +1,129 @@
+############################################################
+#
+# article微服务
+# web访问端口号  约定：8001
+#
+############################################################
+server:
+  port: 8001
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: -1  # tomcat默认大小2M，超过2M的文件不会被捕获，需要调整此处大小为100MB或者-1即可
+
+## 配置项目信息
+spring:
+   profiles:
+     active: dev # dev:开发环境,test:测试环境,prod:生产环境
+   application:
+     name: service-article
+
+
+   datasource: # 数据源的相关配置
+     type: com.zaxxer.hikari.HikariDataSource          # 数据源类型：HikariCP
+     driver-class-name: com.mysql.jdbc.Driver          # mysql驱动
+     url: jdbc:mysql://localhost:3306/imooc-news-dev?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+     username: root
+     password: 123456
+     hikari:
+       connection-timeout: 30000       # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 默认:30秒
+       minimum-idle: 5                 # 最小连接数
+       maximum-pool-size: 20           # 最大连接数
+       auto-commit: true               # 自动提交
+       idle-timeout: 600000            # 连接超时的最大时长（毫秒），超时则被释放（retired），默认:10分钟
+       pool-name: DateSourceHikariCP     # 连接池名字
+       max-lifetime: 1800000           # 连接的生命时长（毫秒），超时而且没被使用则被释放（retired），默认:30分钟 1800000ms
+       connection-test-query: SELECT 1
+
+   jackson:
+     date-format: yyyy-MM-dd HH:mm:ss
+     time-zone: GMT+8
+  #mongodb配置
+   data:
+     mongodb:
+       uri: mongodb://root:root@42.192.10.179:27017
+       database: wfg-news
+#freemark 模板配置
+   freemarker:
+     charset: UTF-8
+     content-type: text/html
+     suffix: .ftl
+     template-loader-path: classpath:/templates/
+#   rabbitmq 配置
+   rabbitmq:
+     host: 42.192.10.179
+     port: 5672
+     username: admin
+     password: admin
+     virtual-host: imooc-news-dev
+
+
+mybatis-plus:
+  type-aliases-package: com.wfg.pojo        #所有pojo类所在包路径
+  mapper-locations: classpath:mapper/*.xml  #mapper 映射文件
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启SQL语句打印
+    map-underscore-to-camel-case: true   # 开启驼峰命名
+
+# 分页插件设置
+pagehelper:
+  helpDialect: mysql
+  support-methods-arguments: true
+
+# 定义freemarker生成的html位置
+freemarker:
+  html:
+    target: D:\freemarker_html
+    article: D:\apache-tomcat-9.0.54\webapps\imooc-news\portal\a
+
+########################################
+#
+# Eureka client 配置
+#
+#######################################
+eureka:
+  #自定义eureka server的信息
+  server:
+    #eureka 实例的hostname
+    hostname: eureka
+
+    port: 7000
+
+
+  client:
+    # 所有的微服务必要要注册到eureka中
+    register-with-eureka: true
+    # 从注册中心获得检索服务实例
+    fetch-registry: true
+    # 注册中心的服务地址
+    service-url:
+      defaultZone: http://eureka-cluster-7001:7001/eureka,http://eureka-cluster-7002:7002/eureka,http://eureka-cluster-7003:7003/eureka
+
+## 配置指定自定义的ribbon规则
+#SERVICE-USER:
+#  ribbon:
+#    NFLoadBalancerRuleClassName:  com.netflix.loadbalancer.RandomRule
+
+
+ribbon:
+  ConnectTimeout: 5000         #创建连接的超时时间，单位ms
+  ReadTimeout: 5000            #在连接创建好以后，调用接口的超时时间 单位ms
+  MaxAutoRetries: 1            #最大重试次数
+  MaxAutoRetriesNextServer: 2  #切换到下个微服务实例的重试次数
+  # 当请求得到某个微服务5s，超时后会进行重试，先重试连接自己当前的这个实例
+  # 如果当前重试失败一次，则会切换到访问集群中的下一个微服务实例，切换最大为2次
+
+
+#配置日志级别
+logging:
+  level:
+    com.wfg.api.controller.user.UserControllerApi: debug
+
+# 配置feign 日志
+feign:
+  client:
+    config:
+      # 配置提供方的名称
+      service-user:
+        loggerLevel: FULL
+  hystrix:
+    enabled: true # 打开feign客户端的内置hystrix

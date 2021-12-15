@@ -65,11 +65,14 @@ public enum ResponseStatusEnum {
     // 人脸识别错误代码
     FACE_VERIFY_TYPE_ERROR(600, false, "人脸比对验证类型不正确！"),
     FACE_VERIFY_LOGIN_ERROR(601, false, "人脸登录失败！"),
-
+    FACE_COMPARED_ERROR(602, false, "人脸对比失败！"),
     // 系统错误，未预期的错误 555
     SYSTEM_ERROR(555, false, "系统繁忙，请稍后再试！"),
     SYSTEM_OPERATION_ERROR(556, false, "操作失败，请重试或联系管理员"),
-    SYSTEM_RESPONSE_NO_INFO(557, false, "");
+    SYSTEM_RESPONSE_NO_INFO(557, false, ""),
+    SYSTEM_ERROR_GLOBAL(558, false, "全局降级：系统繁忙，请稍后再试！"),
+    SYSTEM_ERROR_FEIGN(559, false, "客户端Feign降级：系统繁忙，请稍后再试！"),
+    SYSTEM_ERROR_ZUUL(560, false, "请求系统过于繁忙，请稍后再试！");
 
 
     // 响应业务状态

@@ -6,6 +6,8 @@ import com.wfg.utils.RedisOperator;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.Response;
 
 /**
@@ -18,9 +20,10 @@ public class BaseInterceptor {
 
     @Autowired
     protected RedisOperator redis;
-   public static final String REDIS_USER_TOKEN="redis_user_token";
+    public static final String REDIS_USER_TOKEN="redis_user_token";
     public static final String  REDIS_USER_INFO="redis_user_info";
-
+    public static final String REDIS_ADMIN_TOKEN="redis_admin_token";
+    public static final String REDIS_ALREADY_READ = "redis_already_read";
   public boolean verifyUserIdToken(String id,
                                    String token,
                                    String redisKeyPrefix){
@@ -43,5 +46,14 @@ public class BaseInterceptor {
         return  true;
   }
 
+  public String getCookie(HttpServletRequest request,String cookieName){
+     Cookie[] cookies= request.getCookies();
+     for(Cookie cookie: cookies){
+         if(cookie.getName().equals(cookieName)){
+             return  cookie.getValue();
+         }
+     }
+     return  null;
+  }
 
 }

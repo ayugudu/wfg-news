@@ -1,0 +1,44 @@
+############################################################
+#
+# 文件微服务
+# web访问端口号  约定：8004
+#
+############################################################
+server:
+  port: 8004
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: -1  # tomcat默认大小2M，超过2M的文件不会被捕获，需要调整此处大小为100MB或者-1即可
+
+## 配置项目信息
+spring:
+  profiles:
+     active: dev # dev:开发环境,test:测试环境,prod:生产环境
+  application:
+     name: service-files
+     #json
+  jackson:
+     date-format: yyyy-MM-dd HH:mm:ss
+     time-zone: GMT+8
+   #限制文件大小
+  servlet:
+     multipart:
+       max-file-size: 2048000 # 请求文件大小限制为500kb
+       max-request-size: 2048000 #请求文件的大小
+
+  #mongodb配置
+  data:
+    mongodb:
+      uri: mongodb://root:root@42.192.10.179:27017
+      database: wfg-news
+############################################################
+#
+# 配置fastDfs
+#
+
+############################################################
+
+fdfs:
+  connect-timeout: 30
+  so-timeout: 30
+  tracker-list: 42.192.10.179:22122

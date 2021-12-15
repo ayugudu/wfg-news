@@ -1,0 +1,61 @@
+############################################################
+#
+# 网关 zuul
+# web访问端口号  约定：7070
+#
+############################################################
+server:
+  port: 7070
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: -1  # tomcat默认大小2M，超过2M的文件不会被捕获，需要调整此处大小为100MB或者-1即可
+
+## 配置项目信息
+spring:
+   application:
+     name: springcloud-zuul-server
+
+
+
+########################################
+#
+# Eureka client 配置
+#
+#######################################
+eureka:
+  #自定义eureka server的信息
+  server:
+    #eureka 实例的hostname
+    hostname: eureka
+
+    port: 7000
+
+
+  client:
+    # 所有的微服务必要要注册到eureka中
+    register-with-eureka: true
+    # 从注册中心获得检索服务实例
+    fetch-registry: true
+    # 注册中心的服务地址
+    service-url:
+      defaultZone: http://eureka-cluster-7001:7001/eureka,http://eureka-cluster-7002:7002/eureka,http://eureka-cluster-7003:7003/eureka
+
+
+
+
+# 路由规则 http:[网关地址]:[端口号]/[prefix]/[微服务实例id]/[请求地址路径]
+zuul:
+  routes:
+    #由于路由id和微服务实例id相同，我们可以简化转发的配置
+    service-article: /service-article/**
+#    service-article:                   #配置微服务的路由id，微服务的实例id
+#      path: /service-article/**        #请求路径（微服务前缀）
+#      service-id: service-article      #请求转发的微服务实例id
+#      url: http://192.168.43.250:8001  #请求转发到指定的微服务所在的ip地址
+  prefix:  /api                        #请求前缀
+
+
+blackIp:
+  continueCounts: ${counts:10}   #ip连续请求的次数
+  timeInterval: ${interval:10}   #ip判断时间间隔 单位秒
+  limitTimes: ${times:15}        #限制的事件 单位秒

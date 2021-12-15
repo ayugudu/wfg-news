@@ -54,7 +54,7 @@ public class PassportController extends BaseController implements PassportContro
         //生成6位验证吗
         String random = (int)((Math.random()*9+1)*100000)+"";
         //发送验证码
-        //smsUtils.sendSMS(mobile,random);
+        smsUtils.sendSMS(mobile,random);
         // 发送成功后，将验证码存储redis,用于后期验证
         redis.set(MOBILE_SMSCODE+":"+mobile,random,5*60);
         return GraceJSONResult.ok(random);

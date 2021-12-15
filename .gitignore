@@ -1,48 +1,40 @@
-######################################################################
-# Build Tools
+# Compiled class file
+*.class
 
-.gradle
-/build/
-!gradle/wrapper/gradle-wrapper.jar
-
-target/
-!.mvn/wrapper/maven-wrapper.jar
-
-######################################################################
-# IDE
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
+# Eclipse
 .project
-.settings
-.springBeans
+.classpath
+.settings/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
+# Intellij
 *.ipr
+*.iml
+*.iws
+.idea/
 
-### NetBeans ###
-nbproject/private/
-build/*
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
+# Maven
+target/
 
-######################################################################
-# Others
+
+# Log file
 *.log
-*.xml.versionsBackup
-*.swp
-*/aliyun.properties
+log/
 
 # out
-**/target/
+**/out/
 
-!*/build/*.java
-!*/build/*.html
-!*/build/*.xml
+# Mac
+.DS_Store
+
+# others
+*.jar
+*.war
+*.zip
+*.tar
+*.tar.gz
+*.pid
+*.orig
+temp/
+
+
+imooc-news-dev-common/src/main/resources/aliyun.properties

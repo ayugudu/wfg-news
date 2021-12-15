@@ -25,5 +25,8 @@ public class AppUserVO {
 
     private Integer activeStatus;
 
+    private Integer myFollowCounts;
+
+    private Integer myFansCounts;
 
 }

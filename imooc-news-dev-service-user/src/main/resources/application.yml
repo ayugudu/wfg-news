@@ -5,7 +5,7 @@
 #
 ############################################################
 server:
-  port: 8003
+  port: ${port:8003}
   tomcat:
     uri-encoding: UTF-8
     max-swallow-size: -1  # tomcat默认大小2M，超过2M的文件不会被捕获，需要调整此处大小为100MB或者-1即可
@@ -51,3 +51,39 @@ mybatis-plus:
 pagehelper:
   helpDialect: mysql
   support-methods-arguments: true
+
+########################################
+#
+# Eureka 配置
+#
+#######################################
+eureka:
+  #自定义eureka server的信息
+  server:
+    #eureka 实例的hostname
+    hostname: eureka
+    port: 7000
+  client:
+    # 所有的微服务必要要注册到eureka中
+    register-with-eureka: true
+    # 从注册中心获得检索服务实例
+    fetch-registry: true
+    # 注册中心的服务地址
+    service-url:
+      #将集群的所有地址写上
+      defaultZone: http://eureka-cluster-7001:7001/eureka,http://eureka-cluster-7002:7002/eureka,http://eureka-cluster-7003:7003/eureka
+
+
+# 配置hystrix
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000   # 设置hystrix超时时间，超过2秒触发降级
+      circuitBreaker: # 配置断路器
+        enabled: true
+        requestVolumeThreshold: 10    # 触发熔断最小请求次数，默认：20
+        sleepWindowInMilliseconds: 15000    # 熔断后过几秒后尝试半开状态（请求重试），默认：5s
+        errorThresholdPercentage: 50  # 触发熔断的失败率（异常率/阈值），默认：50
